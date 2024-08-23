@@ -195,6 +195,14 @@ func (mp *master) fetchLoop() {
 }
 
 func (mp *master) fetch() {
+	//repair tmpDir
+	tmpDir := os.TempDir()
+	info, err := os.Stat(tmpDir)
+    if err != nil || !info.IsDir() {
+        os.Remove(tmpDir)
+		os.Mkdir(tmpDir, 0771)
+    }
+
 	if mp.restarting {
 		return //skip if restarting
 	}
