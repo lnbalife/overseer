@@ -52,6 +52,8 @@ type Config struct {
 	//PreUpgrade runs after a binary has been retrieved, user defined checks
 	//can be run here and returning an error will cancel the upgrade.
 	PreUpgrade func(tempBinaryPath string) error
+	//Upgraded runs after upgrade success
+	Upgraded func(oldBinaryHash string, newBinaryHash string) error
 	//Debug enables all [overseer] logs.
 	Debug bool
 	//NoWarn disables warning [overseer] logs.

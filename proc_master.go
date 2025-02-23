@@ -305,6 +305,7 @@ func (mp *master) fetch() {
 		mp.warnf("failed to overwrite binary: %s", err)
 		return
 	}
+	oldHash := mp.binHash
 	mp.debugf("upgraded binary (%x -> %x)", mp.binHash[:12], newHash[:12])
 	mp.binHash = newHash
 	//binary successfully replaced
@@ -312,6 +313,9 @@ func (mp *master) fetch() {
 		mp.triggerRestart()
 	}
 	//and keep fetching...
+	if mp.Config.Upgraded != nil {
+		mp.Config.Upgraded(string(oldHash), string(newHash))
+	}
 	return
 }
 
