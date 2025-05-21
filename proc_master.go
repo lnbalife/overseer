@@ -277,7 +277,7 @@ func (mp *master) fetch() {
 	}
 	//overseer sanity check, dont replace our good binary with a non-executable file
 	tokenIn := token()
-	cmd := exec.Command(fmt.Sprintf("%s -v", tmpBinPath))
+	cmd := exec.Command(tmpBinPath, "-v")
 	cmd.Env = append(os.Environ(), []string{envBinCheck + "=" + tokenIn}...)
 	cmd.Args = os.Args
 	returned := false
