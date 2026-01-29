@@ -1,4 +1,5 @@
-// +build !linux,!darwin,!windows,!freebsd
+//go:build !linux && !darwin && !windows && !freebsd && !android
+// +build !linux,!darwin,!windows,!freebsd,!android
 
 package overseer
 
